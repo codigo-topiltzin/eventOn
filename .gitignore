@@ -1,0 +1,15 @@
+# .gitignore
+# Sesión en vim
+Session.vim
+# ssw
+*.swp
+# Comentarios WAIT
+doc_*.md
+# pug 
+/pug/
+# SASS 
+/assets/static/sass/
+# TypeScript 
+/assets/static/ts/
+# diagramas en mermaid.js
+diagrams.js
