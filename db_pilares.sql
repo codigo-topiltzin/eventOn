@@ -5,6 +5,11 @@ GRANT ALL PRIVILEGES
 ON `db\_session`.* 
 TO 'ErickDeLaRosa'@'%' INDENTIFIED BY 'password' WITH GRANT OPTION;
 */
+CREATE DATABASE db_codigo_topiltzin CHARACTER SET utf8mb4;
+CREATE USER IF NOT EXISTS 'tardis'@'erick14911'
+GRANT ALL PRIVILEGES
+ON `db\_session`.* 
+TO 'tardis'@'erick14911' INDENTIFIED BY 'password' WITH GRANT OPTION;
 USE db_codigo_topiltzin;
 
 START TRANSACTION;
