@@ -112,6 +112,11 @@ SELECT full_name, age, folio, email, phone
 FROM users
 WHERE age>=30 && age<60
 ORDER BY full_name ASC;
+
+CREATE VIEW IF NOT EXISTS v_events AS
+SELECT name, date_e, start_e, finish_e, DATEDIFF(mi, start_e, finish_e)/60 
+FROM events
+ORDER BY date_e DESC;
 /*
 WHERE MATCH(fields) AGAINST('-content' IN BOOLEAN MODE);
 ORDER BY * /ASC/DESC/NULLS LAST;
