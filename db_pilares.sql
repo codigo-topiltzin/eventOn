@@ -67,22 +67,46 @@ START TRANSACTION;
 UPDATE users
 SET
 age =
-WHERE folio = ;
+WHERE folio = "";
 
 UPDATE event
 SET
-start_e =
-WHERE id = ;
+start_e = ""
+WHERE id = "";
 
 UPDATE assistant
 SET
-rol =
-WHERE user_pilares = ;
+rol = ""
+WHERE user_pilares = "";
 
-CREATE VIEW IF NOT EXISTS nameView AS
-SELECT DISTINCT field
-FROM tableA
-WHERE field IN ()
+CREATE VIEW IF NOT EXISTS v_ages AS
+SELECT DISTINCT age
+FROM users;
+
+CREATE VIEW IF NOT EXISTS v_childrens AS
+SELECT full_name, age, folio
+FROM users
+WHERE age<=12;
+
+CREATE VIEW IF NOT EXISTS v_teenagers AS
+SELECT full_name, age, folio, email, phone
+FROM users
+WHERE age>12 && age<18;
+
+CREATE VIEW IF NOT EXISTS v_young_adults AS
+SELECT full_name, age, folio, email, phone
+FROM users
+WHERE age>18 && age<30;
+
+CREATE VIEW IF NOT EXISTS v_older_adults AS
+SELECT full_name, age, folio, email, phone
+FROM users
+WHERE age>60;
+
+CREATE VIEW IF NOT EXISTS v_adults AS
+SELECT full_name, age, folio, email, phone
+FROM users
+WHERE age>=30 && age<60;
 /*
 WHERE MATCH(fields) AGAINST('-content' IN BOOLEAN MODE);
 ORDER BY * /ASC/DESC/NULLS LAST;
