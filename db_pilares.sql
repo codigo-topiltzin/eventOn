@@ -50,29 +50,41 @@ CREATE TABLE IF NOT EXISTS assistants(
 commit;
 /*Insertar datos en las tablas*/
 START TRANSACTION;
+CREATE PROCEDURE pc_insert_user(
+        fn VARCHAR(100), ln VARCHAR(100), f VARCHAR(12), a INT UNSIGNED, s VARCHAR(20), p VARCHAR(12), e VARCHAR(50)
+)
 INSERT OR REMPLACE INTO users(
         first_name, last_name, folio, age, sex,  phone, email
 )
 VALUES
-()
+(fn, ln, f, a, s, p, e)
 ;
+CREATE PROCEDURE pc_insert_personal(
+        fn VARCHAR(100), ln VARCHAR(100), f VARCHAR(12), a INT UNSIGNED, s VARCHAR(20), p VARCHAR(12), e VARCHAR(50), fb VARCHAR(12), fg VARCHAR(12)
+)
 INSERT OR REMPLACE INTO users(
         first_name, last_name, folio, age, sex,  phone, email, folio_bf, figure
 )
 VALUES
-()
+(fn, ln, f, a, s, p, e, fb, fg)
 ;
+CREATE PROCEDURE pc_insert_event(
+      n VARCHAR(100), d DATE, s TIME, f TIME 
+)
 INSERT OR REMPLACE INTO events(
-        name, date_e, time_e, start_e, finish_e
+        name, date_e, start_e, finish_e
 )
 VALUES
-()
+(n, d. s. f)
 ;
+CREATE PROCEDURE pc_insert_assistand(
+        r VARCHAR(100), u INT UNSIGNED, e INT UNSIGNED
+)
 INSERT OR REMPLACE INTO assistants(
         rol, user_pilares, event 
 )
 VALUES
-()
+(r, u, e)
 ;
 commit;
 /*Actualizacion de datos */
@@ -159,6 +171,19 @@ WHERE MATCH(fields) AGAINST('-content' IN BOOLEAN MODE);
 ORDER BY * /ASC/DESC/NULLS LAST;
 LIMIT /OFFSET
 */
+    DELIMITER $$
+    
+    CREATE PROCEDURE calcula_edad(AGNO_NACIMIENTO INT)
+
+    BEGIN
+    DECLARE AGNO_ACTUAL INT DEFAULT 2022;
+    DECLARE EDAD INT;
+    SET EDAD=AGNO_ACTUAL-AGNO_NACIMIENTO;
+    SELECT EDAD;
+    END;
+    $$
+
+    DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_assistants AS
 SELECT users.full_name AS Nombre, 
