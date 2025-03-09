@@ -86,27 +86,32 @@ FROM users;
 CREATE VIEW IF NOT EXISTS v_childrens AS
 SELECT full_name, age, folio
 FROM users
-WHERE age<=12;
+WHERE age<=12
+ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_teenagers AS
 SELECT full_name, age, folio, email, phone
 FROM users
-WHERE age>12 && age<18;
+WHERE age>12 && age<18
+ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_young_adults AS
 SELECT full_name, age, folio, email, phone
 FROM users
-WHERE age>18 && age<30;
+WHERE age>18 && age<30
+ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_older_adults AS
 SELECT full_name, age, folio, email, phone
 FROM users
-WHERE age>60;
+WHERE age>60
+ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_adults AS
 SELECT full_name, age, folio, email, phone
 FROM users
-WHERE age>=30 && age<60;
+WHERE age>=30 && age<60
+ORDER BY full_name ASC;
 /*
 WHERE MATCH(fields) AGAINST('-content' IN BOOLEAN MODE);
 ORDER BY * /ASC/DESC/NULLS LAST;
