@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS users(
         last_name VARCHAR(100) NOT NULL,
         full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
         folio VARCHAR(12) NOT NULL,
+        folio_bf VARCHAR(12),
+        figure VARCHAR(50),
         age INT UNSIGNED,
         sex VARCHAR(20),
         phone VARCHAR(12),
@@ -47,6 +49,12 @@ commit;
 START TRANSACTION;
 INSERT OR REMPLACE INTO users(
         first_name, last_name, folio, age, sex,  phone, email
+)
+VALUES
+()
+;
+INSERT OR REMPLACE INTO users(
+        first_name, last_name, folio, age, sex,  phone, email, folio_bf, figure
 )
 VALUES
 ()
@@ -209,7 +217,7 @@ FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name 
-HAVING events.name="" && users.age>=30 && users.age<60 
+HAVING events.name="" && users.age>60
 ORDER BY users.full_name ASC
 ;
 /*
