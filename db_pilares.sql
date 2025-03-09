@@ -80,41 +80,63 @@ rol = ""
 WHERE user_pilares = "";
 
 CREATE VIEW IF NOT EXISTS v_ages AS
-SELECT DISTINCT age
+SELECT DISTINCT age AS Edad
 FROM users;
 
 CREATE VIEW IF NOT EXISTS v_childrens AS
-SELECT full_name, age, folio
+SELECT full_name AS Nombre,
+       age AS Edad, 
+       folio AS Folio
 FROM users
 WHERE age<=12
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_teenagers AS
-SELECT full_name, age, folio, email, phone
+SELECT full_name AS Nombre,
+       age AS Edad,
+       folio AS Folio,
+       email AS Email, 
+       phone AS Telefono
 FROM users
 WHERE age>12 && age<18
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_young_adults AS
-SELECT full_name, age, folio, email, phone
+SELECT full_name AS Nombre,
+       age AS Edad,
+       folio AS Folio,
+       email AS Email,
+       phone AS Telefono
 FROM users
 WHERE age>18 && age<30
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_older_adults AS
-SELECT full_name, age, folio, email, phone
+SELECT full_name AS Nombre,
+       age AS Edad,
+       folio As Folio,
+       email As Email,
+       phone As Telefono
 FROM users
 WHERE age>60
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_adults AS
-SELECT full_name, age, folio, email, phone
+SELECT full_name AS Nombre,
+       age AS Edad,
+       folio As Folio,
+       email As Email,
+       phone As Telefono
 FROM users
 WHERE age>=30 && age<60
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_events AS
-SELECT name, date_e, start_e, finish_e, DATEDIFF(mi, start_e, finish_e)/60 
+SELECT name AS Nombre, 
+       date_e AS Fecha,
+       start_e AS "Hora de inicio",
+       finish_e AS "Hora de termino",
+       DATEDIFF(mi, start_e, finish_e)/60 AS Duracion
 FROM events
 ORDER BY date_e DESC;
 /*
