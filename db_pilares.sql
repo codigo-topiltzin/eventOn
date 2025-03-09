@@ -47,11 +47,8 @@ CREATE TABLE IF NOT EXISTS assistants(
         CONSTRAINT fk_assistants_event FOREIGN KEY(event) REFERENCES events(id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDb;
-        /* CONSTRAINT fk_tableA_tableB FOREIGN KEY(field) REFERENCES tableB(field)
-        ON DELETE SET ON UPDATE NO ACTION
-        ATTACH DATABASE '' AS ;
-        MyISAM*/
 commit;
+
 START TRANSACTION;
 INSERT OR REMPLACE INTO users(
         first_name, last_name, folio, age, sex,  phone, email
@@ -245,8 +242,11 @@ FROM
 );
 */
 START TRANSACTION;
-DELETE FROM tableA
-WHERE field = ;
+DELETE 
+FROM assistants 
+LEFT JOIN users ON users.id = assistants.user_pilares
+WHERE users.folio = "";
+commit;
 /*
 DROP TABLE IF EXISTS tableA;
 TRUNCATE FROM tableA;
