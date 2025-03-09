@@ -1,4 +1,3 @@
-
 /* 
 CREATE DATABASE db_codigo_topiltzin CHARACTER SET utf8mb4;
 CREATE USER IF NOT EXISTS 'account'@%
@@ -44,3 +43,59 @@ CREATE TABLE IF NOT EXISTS assistant(
         ON DELETE SET ON UPDATE NO ACTION
         ATTACH DATABASE '' AS ;
         MyISAM*/
+commit;
+START TRANSACTION;
+INSERT OR REMPLACE INTO users(
+        first_name, last_name, folio, age, sex,  phone, email
+)
+VALUES
+()
+;
+INSERT OR REMPLACE INTO events(
+        name, date_e, time_e, start_e, finish_e
+)
+VALUES
+()
+;
+INSERT OR REMPLACE INTO assistant(
+        rol, user_pilares, event 
+)
+VALUES
+()
+;
+START TRANSACTION;
+UPDATE users
+SET
+age =
+WHERE folio = ;
+
+UPDATE event
+SET
+start_e =
+WHERE id = ;
+
+UPDATE assistant
+SET
+rol =
+WHERE user_pilares = ;
+
+CREATE VIEW IF NOT EXISTS nameView AS
+SELECT DISTINCT field
+FROM tableA
+WHERE field IN ()
+/*
+WHERE MATCH(fields) AGAINST('-content' IN BOOLEAN MODE);
+ORDER BY * /ASC/DESC/NULLS LAST;
+LIMIT /OFFSET
+*/
+
+CREATE VIEW IF NOT EXISTS nameView AS
+SELECT tableA.field1, tableB.field2
+FROM tableA
+CROSS JOIN tableB ON tableA.fieldPK = tableB.fielFK
+;
+/*
+FULL OUTER JOIN
+WHERE tableA.id IS NULL OR tableB.id IS NULL;
+GROUP BY field HAVING ;
+*/
