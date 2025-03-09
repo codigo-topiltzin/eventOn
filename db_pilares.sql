@@ -169,25 +169,47 @@ HAVING events.name=""
 ORDER BY users.full_name ASC
 ;
 
-CREATE VIEW IF NOT EXISTS v_all_number_event AS
+CREATE VIEW IF NOT EXISTS v_childrens_number_event AS
 SELECT events.name AS Evento,
        COUNT(users.id) AS "Infancias <=12"
 FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name
-HAVING events.name="" && users.id<=12
+HAVING events.name="" && users.age<=12
 ORDER BY users.full_name ASC
 ;
 
-CREATE VIEW IF NOT EXISTS v_all_number_event AS
+CREATE VIEW IF NOT EXISTS v_youngs_number_event AS
 SELECT events.name AS Evento,
-       COUNT(users.id) AS "Infancias <=12"
+       COUNT(users.id) AS "Adolecentes <=12<18"
 FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name
-HAVING events.name="" && users.id<=12
+HAVING events.name="" && users.age>12 && users.age<18 
+ORDER BY users.full_name ASC
+;
+
+CREATE VIEW IF NOT EXISTS v_adults_number_event AS
+SELECT events.name AS Evento,
+       COUNT(users.id) AS "Adultos >=30<60"
+FROM assistants
+LEFT JOIN users ON users.id = assistants.user_pilares
+LEFT JOIN event ON events.id = assistants.event
+GROUP BY events.name 
+HAVING events.name="" && users.age>=30 && users.age<60 
+ORDER BY users.full_name ASC
+;
+
+CREATE VIEW IF NOT EXISTS v_old_adults_number_event AS
+SELECT events.name AS Evento,
+       COUNT(users.id) AS "Adulto mayor >60"
+FROM assistants
+LEFT JOIN users ON users.id = assistants.user_pilares
+LEFT JOIN event ON events.id = assistants.event
+GROUP BY events.name 
+HAVING events.name="" && users.age>=30 && users.age<60 
 ORDER BY users.full_name ASC
 ;
 /*
