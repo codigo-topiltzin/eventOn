@@ -28,15 +28,15 @@ CREATE TABLE IF NOT EXISTS events(
         finish_e TIME NOT NULL,
         CONSTRAINT pk_events PRIMARY KEY(id)
 )ENGINE=InnoDb;
-CREATE TABLE IF NOT EXISTS assistant(
+CREATE TABLE IF NOT EXISTS assistants(
         id INT UNSIGNED AUTO_INCREMENT,
-        rol VARCHAR(100) NOT NULL,
+        role VARCHAR(100) NOT NULL,
         user_pilares INT UNSIGNED,
         event INT UNSIGNED,
-        CONSTRAINT pk_assistant PRIMARY KEY(id),
-        CONSTRAINT fk_assistant_users FOREIGN KEY(user_pilares) REFERENCES users(id)
+        CONSTRAINT pk_assistants PRIMARY KEY(id),
+        CONSTRAINT fk_assistants_users FOREIGN KEY(user_pilares) REFERENCES users(id)
         ON DELETE NO ACTION ON UPDATE CASCADE,
-        CONSTRAINT fk_assistant_event FOREIGN KEY(event) REFERENCES events(id)
+        CONSTRAINT fk_assistants_event FOREIGN KEY(event) REFERENCES events(id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDb;
         /* CONSTRAINT fk_tableA_tableB FOREIGN KEY(field) REFERENCES tableB(field)
@@ -57,7 +57,7 @@ INSERT OR REMPLACE INTO events(
 VALUES
 ()
 ;
-INSERT OR REMPLACE INTO assistant(
+INSERT OR REMPLACE INTO assistants(
         rol, user_pilares, event 
 )
 VALUES
@@ -74,7 +74,7 @@ SET
 start_e = ""
 WHERE id = "";
 
-UPDATE assistant
+UPDATE assistants
 SET
 rol = ""
 WHERE user_pilares = "";
@@ -145,10 +145,50 @@ ORDER BY * /ASC/DESC/NULLS LAST;
 LIMIT /OFFSET
 */
 
-CREATE VIEW IF NOT EXISTS nameView AS
-SELECT tableA.field1, tableB.field2
-FROM tableA
-CROSS JOIN tableB ON tableA.fieldPK = tableB.fielFK
+CREATE VIEW IF NOT EXISTS v_assistants AS
+SELECT users.full_name AS Nombre, 
+       users.folio AS Folio,
+       assistants.role AS Participacion,
+       users.email AS Email,
+       users.phone AS Telefono
+FROM assistants
+LEFT JOIN users ON users.id = assistants.user_pilares
+LEFT JOIN event ON events.id = assistants.event
+WHERE events.name=""
+ORDER BY users.full_name ASC
+;
+
+CREATE VIEW IF NOT EXISTS v_number_assistant AS
+SELECT events.name AS Evento,
+       COUNT(users.id) AS "Numero de asistentes"
+FROM assistants
+LEFT JOIN users ON users.id = assistants.user_pilares
+LEFT JOIN event ON events.id = assistants.event
+GROUP BY events.name
+HAVING events.name=""
+ORDER BY users.full_name ASC
+;
+
+CREATE VIEW IF NOT EXISTS v_all_number_event AS
+SELECT events.name AS Evento,
+       COUNT(users.id) AS "Infancias <=12"
+FROM assistants
+LEFT JOIN users ON users.id = assistants.user_pilares
+LEFT JOIN event ON events.id = assistants.event
+GROUP BY events.name
+HAVING events.name="" && users.id<=12
+ORDER BY users.full_name ASC
+;
+
+CREATE VIEW IF NOT EXISTS v_all_number_event AS
+SELECT events.name AS Evento,
+       COUNT(users.id) AS "Infancias <=12"
+FROM assistants
+LEFT JOIN users ON users.id = assistants.user_pilares
+LEFT JOIN event ON events.id = assistants.event
+GROUP BY events.name
+HAVING events.name="" && users.id<=12
+ORDER BY users.full_name ASC
 ;
 /*
 FULL OUTER JOIN
