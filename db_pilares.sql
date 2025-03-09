@@ -1,14 +1,12 @@
 /* 
-CREATE DATABASE db_codigo_topiltzin CHARACTER SET utf8mb4;
-CREATE USER IF NOT EXISTS 'account'@%
-GRANT ALL PRIVILEGES
-ON `db\_session`.* 
-TO 'ErickDeLaRosa'@'%' INDENTIFIED BY 'password' WITH GRANT OPTION;
+@author:erick14911
+Base de datos db_codigo_topiltzin para el registro de usuarios y eventos
 */
+/*Crear Base de Datos*/
 CREATE DATABASE db_codigo_topiltzin CHARACTER SET utf8mb4;
-
+/*Crear el usuario administrador*/
 CREATE USER IF NOT EXISTS 'erick14911'@%;
-
+/*Proporciona permisos para la base de datos*/
 GRANT ALL 
 ON 'db_codigo_topiltzin'.* 
 TO 'erick14911'@% INDENTIFIED BY 'password';
