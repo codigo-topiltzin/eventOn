@@ -171,19 +171,16 @@ WHERE MATCH(fields) AGAINST('-content' IN BOOLEAN MODE);
 ORDER BY * /ASC/DESC/NULLS LAST;
 LIMIT /OFFSET
 */
-    DELIMITER $$
-    
-    CREATE PROCEDURE calcula_edad(AGNO_NACIMIENTO INT)
+DELIMITER $$
 
-    BEGIN
-    DECLARE AGNO_ACTUAL INT DEFAULT 2022;
-    DECLARE EDAD INT;
-    SET EDAD=AGNO_ACTUAL-AGNO_NACIMIENTO;
-    SELECT EDAD;
-    END;
-    $$
+CREATE PROCEDURE pc_assistants(e VARCHAR(100))
 
-    DELIMITER ;
+BEGIN
+        SELECT * FROM v_assistants;
+END;
+$$
+
+DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_assistants AS
 SELECT users.full_name AS Nombre, 
@@ -194,9 +191,20 @@ SELECT users.full_name AS Nombre,
 FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
-WHERE events.name=""
+WHERE events.name LIKE e
 ORDER BY users.full_name ASC
 ;
+
+DELIMITER $$
+
+CREATE PROCEDURE pc_number_assistants(e VARCHAR(100))
+
+BEGIN
+        SELECT * FROM v_assistants;
+END;
+$$
+
+DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_number_assistant AS
 SELECT events.name AS Evento,
@@ -205,9 +213,20 @@ FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name
-HAVING events.name=""
+HAVING events.name LIKE e
 ORDER BY users.full_name ASC
 ;
+
+DELIMITER $$
+
+CREATE PROCEDURE pc_childrens_number_event(e VARCHAR(100))
+
+BEGIN
+        SELECT * FROM v_childrens_number_event;
+END;
+$$
+
+DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_childrens_number_event AS
 SELECT events.name AS Evento,
@@ -216,9 +235,20 @@ FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name
-HAVING events.name="" && users.age<=12
+HAVING events.name LIKE e && users.age<=12
 ORDER BY users.full_name ASC
 ;
+
+DELIMITER $$
+
+CREATE PROCEDURE pc_youngs_number_event(e VARCHAR(100))
+
+BEGIN
+        SELECT * FROM v_youngs_number_event;
+END;
+$$
+
+DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_youngs_number_event AS
 SELECT events.name AS Evento,
@@ -227,9 +257,20 @@ FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name
-HAVING events.name="" && users.age>12 && users.age<18 
+HAVING events.name LIKE e && users.age>12 && users.age<18 
 ORDER BY users.full_name ASC
 ;
+
+DELIMITER $$
+
+CREATE PROCEDURE pc_adults_number_event(e VARCHAR(100))
+
+BEGIN
+        SELECT * FROM v_adults_number_event;
+END;
+$$
+
+DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_adults_number_event AS
 SELECT events.name AS Evento,
@@ -238,9 +279,20 @@ FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name 
-HAVING events.name="" && users.age>=30 && users.age<60 
+HAVING events.name LIKE e && users.age>=30 && users.age<60 
 ORDER BY users.full_name ASC
 ;
+
+DELIMITER $$
+
+CREATE PROCEDURE pc_old_adults_number_event(e VARCHAR(100))
+
+BEGIN
+        SELECT * FROM v_old_adults_number_event;
+END;
+$$
+
+DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_old_adults_number_event AS
 SELECT events.name AS Evento,
@@ -249,7 +301,7 @@ FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
 LEFT JOIN event ON events.id = assistants.event
 GROUP BY events.name 
-HAVING events.name="" && users.age>60
+HAVING events.name LIKE e && users.age>60
 ORDER BY users.full_name ASC
 ;
 commit;
@@ -259,11 +311,14 @@ WHERE tableA.id IS NULL OR tableB.id IS NULL;
 GROUP BY field HAVING ;
 */
 /*Eliminar un asistente*/
-START TRANSACTION;
+DELIMITER $$
+
+CREATE PROCEDURE pc_delimiter(f VARCHAR(12))
+
 DELETE 
 FROM assistants 
 LEFT JOIN users ON users.id = assistants.user_pilares
-WHERE users.folio = "";
+WHERE users.folio = f;
 commit;
 /*
 DROP TABLE IF EXISTS tableA;
