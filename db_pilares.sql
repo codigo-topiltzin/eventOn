@@ -10,9 +10,9 @@ CREATE USER IF NOT EXISTS 'erick14911'@%;
 GRANT ALL 
 ON 'db_codigo_topiltzin'.* 
 TO 'erick14911'@% INDENTIFIED BY 'password';
-
+/*Usa la base de datos db_codigo_topiltzon*/
 USE db_codigo_topiltzin;
-
+/*Creacion de tablas */
 START TRANSACTION;
 CREATE TABLE IF NOT EXISTS users(
         id INT UNSIGNED AUTO_INCREMENT,
