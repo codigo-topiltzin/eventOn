@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS assistants(
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDb;
 commit;
-
+/*Insertar datos en las tablas*/
 START TRANSACTION;
 INSERT OR REMPLACE INTO users(
         first_name, last_name, folio, age, sex,  phone, email
@@ -74,6 +74,8 @@ INSERT OR REMPLACE INTO assistants(
 VALUES
 ()
 ;
+commit;
+/*Actualizacion de datos */
 START TRANSACTION;
 UPDATE users
 SET
@@ -89,7 +91,9 @@ UPDATE assistants
 SET
 rol = ""
 WHERE user_pilares = "";
-
+commit;
+/*Crear views*/
+START TRANSACTION;
 CREATE VIEW IF NOT EXISTS v_ages AS
 SELECT DISTINCT age AS Edad
 FROM users;
@@ -223,24 +227,13 @@ GROUP BY events.name
 HAVING events.name="" && users.age>60
 ORDER BY users.full_name ASC
 ;
+commit;
 /*
 FULL OUTER JOIN
 WHERE tableA.id IS NULL OR tableB.id IS NULL;
 GROUP BY field HAVING ;
 */
-CREATE VIEW IF NOT EXISTS nameView AS
-SELECT field_1
-FROM
-UNION
-SELECT field
-FROM
- /*
- UNION ALL
- EXCEPT
- INTERSECT
- WHERE field = (
-);
-*/
+/*Eliminar un asistente*/
 START TRANSACTION;
 DELETE 
 FROM assistants 
