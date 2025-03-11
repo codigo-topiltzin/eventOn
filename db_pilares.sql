@@ -89,21 +89,31 @@ VALUES
 commit;
 /*Actualizacion de datos */
 START TRANSACTION;
+CREATE PROCEDURE pc_update_age_user(
+        f VARCHAR(12), a INT UNSIGNED
+)
 UPDATE users
 SET
-age =
-WHERE folio = "";
+age = a
+WHERE folio = f;
 
+CREATE PROCEDURE pc_update_date_begin(
+        f VARCHAR(12), b DATE
+)
 UPDATE event
 SET
-start_e = ""
-WHERE id = "";
+start_e = b
+WHERE id = f;
 
+CREATE PROCEDURE pc_update_rol(
+        u VARCHAR(12), r DATE
+)
 UPDATE assistants
 SET
-rol = ""
-WHERE user_pilares = "";
+rol = r
+WHERE user_pilares = u;
 commit;
+
 /*Crear views*/
 START TRANSACTION;
 CREATE VIEW IF NOT EXISTS v_ages AS
