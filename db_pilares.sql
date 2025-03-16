@@ -119,10 +119,23 @@ role = r
 WHERE user_pilares = u;
 commit;
 
-/*Eliminar un asistente*/
+/*Delete a user*/
 START TRANSACTION;
-DELIMITER $$
 
+CREATE PROCEDURE pc_delete_user(
+        f VARCHAR(12)
+)
+DELETE 
+FROM users 
+WHERE reference_number = f;
+/*Delete a event*/
+CREATE PROCEDURE pc_delete_event(
+        n VARCHAR(100), sd DATE
+)
+DELETE 
+FROM events 
+WHERE name LIKE n AND start_date LIKE sd
+/*Delete assistant*/
 CREATE PROCEDURE pc_delete_assistant(
         f VARCHAR(12)
 )
