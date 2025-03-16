@@ -245,9 +245,10 @@ DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_assistants AS
 SELECT users.full_name AS Nombre, 
-       users.reference_number AS reference_number,
+       users.reference_number AS Folio,
        assistants.role AS Participacion,
-       users.email AS Email,
+       users.email AS 'Correo electronico',
+       users.mobile AS Celular,
        users.phone AS Telefono
 FROM assistants
 LEFT JOIN users ON users.id = assistants.user_pilares
