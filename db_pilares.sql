@@ -81,7 +81,7 @@ VALUES
 (r, u, e)
 ;
 commit;
-/*Actualizacion de datos */
+/*Update user*/
 START TRANSACTION;
 CREATE PROCEDURE pc_update_user(
         fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
@@ -98,23 +98,43 @@ phone = p,
 mobile = m,
 email = e
 WHERE reference_number = f;
-/*pc_update_age_user("1064XR06", 28);*/
-CREATE PROCEDURE pc_update_date_begin(
-        f VARCHAR(12), b DATE
+/*Update event*/
+CREATE PROCEDURE pc_update_event(
+        n VARCHAR(100), sd DATE, st TIME, et TIME
 )
 UPDATE event
 SET
-start_e = b
-WHERE id = f;
-
-CREATE PROCEDURE pc_update_rol(
-        u VARCHAR(12), r DATE
+name = n,
+start_date = sd,
+start_time = st,
+end_time = et
+WHERE name LIKE n AND start_date LIKE sd;
+/*Update assistants*/
+CREATE PROCEDURE pc_update_assistants(
+        u INT UNSIGNED, r DATE
 )
 UPDATE assistants
 SET
-rol = r
+role = r
 WHERE user_pilares = u;
 commit;
+
+/*Eliminar un asistente*/
+START TRANSACTION;
+DELIMITER $$
+
+CREATE PROCEDURE pc_delete_assistant(
+        f VARCHAR(12)
+)
+DELETE 
+FROM assistants 
+LEFT JOIN users ON users.id = assistants.user_pilares
+WHERE users.reference_number = f;
+commit;
+/*
+DROP TABLE IF EXISTS tableA;
+TRUNCATE FROM tableA;
+*/
 
 /*Crear views*/
 START TRANSACTION;
@@ -321,18 +341,4 @@ commit;
 FULL OUTER JOIN
 WHERE tableA.id IS NULL OR tableB.id IS NULL;
 GROUP BY field HAVING ;
-*/
-/*Eliminar un asistente*/
-DELIMITER $$
-
-CREATE PROCEDURE pc_delimiter(f VARCHAR(12))
-
-DELETE 
-FROM assistants 
-LEFT JOIN users ON users.id = assistants.user_pilares
-WHERE users.reference_number = f;
-commit;
-/*
-DROP TABLE IF EXISTS tableA;
-TRUNCATE FROM tableA;
 */
