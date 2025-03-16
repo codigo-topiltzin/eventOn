@@ -18,12 +18,12 @@ CREATE TABLE IF NOT EXISTS users(
         id INT UNSIGNED AUTO_INCREMENT,
         first_name VARCHAR(100) NOT NULL,
         last_name VARCHAR(100) NOT NULL,
+        birthdate DATETIME NOT NULL,
+        gander VARCHAR(20) NOT NULL,
         full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
         folio VARCHAR(12) NOT NULL,
         folio_bf VARCHAR(12),
         role VARCHAR(50),
-         DATETIME,
-        gander VARCHAR(20),
         phone VARCHAR(12),
         mobile VARCHAR(12),
         email VARCHAR(50),
@@ -49,41 +49,33 @@ CREATE TABLE IF NOT EXISTS assistants(
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDb;
 commit;
-/*Insertar datos en las tablas*/
+/*Insert a new user*/
 START TRANSACTION;
 CREATE PROCEDURE pc_insert_user(
-        fn VARCHAR(100), lan VARCHAR(100), f VARCHAR(12), a INT UNSIGNED, s VARCHAR(20), p VARCHAR(12), e VARCHAR(50)
+        fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
 )
 INSERT OR REMPLACE INTO users(
-        first_name, last_name, folio, age, sex,  phone, email
+        first_name, last_name, birthdate, gander, folio, folio_bf, role, phone, mobile, email
 )
 VALUES
-(fn, lan, f, a, s, p, e)
+(fn, lan, b, g, f, fb, r, p, m, e)
 ;
-/*pc_insert_user("","","",45,"","");*/
-CREATE PROCEDURE pc_insert_personal(
-        fn VARCHAR(100), ln VARCHAR(100), f VARCHAR(12), a INT UNSIGNED, s VARCHAR(20), p VARCHAR(12), e VARCHAR(50), fb VARCHAR(12), fg VARCHAR(12)
-)
-INSERT OR REMPLACE INTO users(
-        first_name, last_name, folio, age, sex,  phone, email, folio_bf, figure
-)
-VALUES
-(fn, ln, f, a, s, p, e, fb, fg)
-;
+/*Insert a new event*/
 CREATE PROCEDURE pc_insert_event(
-      n VARCHAR(100), d DATE, s TIME, f TIME 
+      n VARCHAR(100), d DATE, st TIME, et TIME 
 )
 INSERT OR REMPLACE INTO events(
-        name, date_e, start_e, finish_e
+        name, start_date, start_time, end_time
 )
 VALUES
-(n, d. s. f)
+(n, d, st, et)
 ;
+/*Insert a new assistand*/
 CREATE PROCEDURE pc_insert_assistand(
         r VARCHAR(100), u INT UNSIGNED, e INT UNSIGNED
 )
 INSERT OR REMPLACE INTO assistants(
-        rol, user_pilares, event 
+        role, user_pilares, event 
 )
 VALUES
 (r, u, e)
