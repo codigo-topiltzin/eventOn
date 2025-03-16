@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS users(
         id INT UNSIGNED AUTO_INCREMENT,
         first_name VARCHAR(100) NOT NULL,
         last_name VARCHAR(100) NOT NULL,
+        full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
         birthdate DATETIME NOT NULL,
         gander VARCHAR(20) NOT NULL,
-        full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
         reference_number VARCHAR(12) NOT NULL,
         reference_number_bf VARCHAR(12),
         role VARCHAR(50),
@@ -151,9 +151,21 @@ TRUNCATE FROM tableA;
 
 /*Crear views*/
 START TRANSACTION;
+CREATE VIEW IF NOT EXISTS v_users AS
+SELECT full_name,
+       DATEDIFF(year,CURDATE(),birthdate) AS age,
+       gander, 
+       reference_number,
+       reference_number_bf,
+       role,
+       phone,
+       mobile,
+       email
+FROM users;
+
 CREATE VIEW IF NOT EXISTS v_ages AS
 SELECT DISTINCT age AS Edad
-FROM users;
+FROM v_users;
 
 CREATE VIEW IF NOT EXISTS v_childrens AS
 SELECT full_name AS Nombre,
