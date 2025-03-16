@@ -170,56 +170,60 @@ FROM v_users;
 CREATE VIEW IF NOT EXISTS v_childrens AS
 SELECT full_name AS Nombre,
        age AS Edad, 
-       reference_number AS reference_number
-FROM users
+       reference_number AS Folio
+FROM v_users
 WHERE age<=12
 ORDER BY full_name ASC;
 /*SELECT * FROM v_childrens;*/
 CREATE VIEW IF NOT EXISTS v_teenagers AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       reference_number AS reference_number,
+       reference_number AS Folio,
        email AS Email, 
-       phone AS Telefono
-FROM users
+       phone AS Telefono,
+       mobile AS Celular
+FROM v_users
 WHERE age>12 && age<18
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_young_adults AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       reference_number AS reference_number,
-       email AS Email,
-       phone AS Telefono
-FROM users
+       reference_number AS Folio,
+       email AS "Correo Electronico",
+       phone AS Telefono,
+       mobile AS Celular
+FROM v_users
 WHERE age>18 && age<30
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_older_adults AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       reference_number As reference_number,
-       email As Email,
-       phone As Telefono
-FROM users
+       reference_number As Folio,
+       email As 'Correo electronico',
+       phone As Telefono,
+       mobile AS Celular
+FROM v_users
 WHERE age>60
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_adults AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       reference_number As reference_number,
-       email As Email,
-       phone As Telefono
-FROM users
+       reference_number As Folio,
+       email As 'Correo electronico',
+       phone As Telefono,
+       mobile AS Celular
+FROM v_users
 WHERE age>=30 && age<60
 ORDER BY full_name ASC;
 
 CREATE VIEW IF NOT EXISTS v_events AS
 SELECT name AS Nombre, 
-       date_e AS Fecha,
-       start_e AS "Hora de inicio",
-       finish_e AS "Hora de termino",
+       start_date AS Fecha,
+       start_time AS "Hora de inicio",
+       end_time AS "Hora de termino",
        DATEDIFF(mi, start_e, finish_e)/60 AS Duracion
 FROM events
 ORDER BY date_e DESC;
