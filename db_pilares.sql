@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS users(
         birthdate DATETIME NOT NULL,
         gander VARCHAR(20) NOT NULL,
         full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
-        folio VARCHAR(12) NOT NULL,
-        folio_bf VARCHAR(12),
+        reference_number VARCHAR(12) NOT NULL,
+        reference_number_bf VARCHAR(12),
         role VARCHAR(50),
         phone VARCHAR(12),
         mobile VARCHAR(12),
@@ -55,7 +55,7 @@ CREATE PROCEDURE pc_insert_user(
         fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
 )
 INSERT OR REMPLACE INTO users(
-        first_name, last_name, birthdate, gander, folio, folio_bf, role, phone, mobile, email
+        first_name, last_name, birthdate, gander, reference_number, reference_number_bf, role, phone, mobile, email
 )
 VALUES
 (fn, lan, b, g, f, fb, r, p, m, e)
@@ -83,13 +83,21 @@ VALUES
 commit;
 /*Actualizacion de datos */
 START TRANSACTION;
-CREATE PROCEDURE pc_update_age_user(
-        f VARCHAR(12), a INT UNSIGNED
+CREATE PROCEDURE pc_update_user(
+        fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
 )
 UPDATE users
 SET
-age = a
-WHERE folio = f;
+first_name = fn,
+last_name = lan,
+birthdate = b,
+gander = g,
+reference_number = fb,
+role = r,
+phone = p,
+mobile = m,
+email = e
+WHERE reference_number = f;
 /*pc_update_age_user("1064XR06", 28);*/
 CREATE PROCEDURE pc_update_date_begin(
         f VARCHAR(12), b DATE
@@ -117,7 +125,7 @@ FROM users;
 CREATE VIEW IF NOT EXISTS v_childrens AS
 SELECT full_name AS Nombre,
        age AS Edad, 
-       folio AS Folio
+       reference_number AS reference_number
 FROM users
 WHERE age<=12
 ORDER BY full_name ASC;
@@ -125,7 +133,7 @@ ORDER BY full_name ASC;
 CREATE VIEW IF NOT EXISTS v_teenagers AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       folio AS Folio,
+       reference_number AS reference_number,
        email AS Email, 
        phone AS Telefono
 FROM users
@@ -135,7 +143,7 @@ ORDER BY full_name ASC;
 CREATE VIEW IF NOT EXISTS v_young_adults AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       folio AS Folio,
+       reference_number AS reference_number,
        email AS Email,
        phone AS Telefono
 FROM users
@@ -145,7 +153,7 @@ ORDER BY full_name ASC;
 CREATE VIEW IF NOT EXISTS v_older_adults AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       folio As Folio,
+       reference_number As reference_number,
        email As Email,
        phone As Telefono
 FROM users
@@ -155,7 +163,7 @@ ORDER BY full_name ASC;
 CREATE VIEW IF NOT EXISTS v_adults AS
 SELECT full_name AS Nombre,
        age AS Edad,
-       folio As Folio,
+       reference_number As reference_number,
        email As Email,
        phone As Telefono
 FROM users
@@ -188,7 +196,7 @@ DELIMITER ;
 
 CREATE VIEW IF NOT EXISTS v_assistants AS
 SELECT users.full_name AS Nombre, 
-       users.folio AS Folio,
+       users.reference_number AS reference_number,
        assistants.role AS Participacion,
        users.email AS Email,
        users.phone AS Telefono
@@ -322,7 +330,7 @@ CREATE PROCEDURE pc_delimiter(f VARCHAR(12))
 DELETE 
 FROM assistants 
 LEFT JOIN users ON users.id = assistants.user_pilares
-WHERE users.folio = f;
+WHERE users.reference_number = f;
 commit;
 /*
 DROP TABLE IF EXISTS tableA;
