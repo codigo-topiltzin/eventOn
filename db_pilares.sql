@@ -21,19 +21,20 @@ CREATE TABLE IF NOT EXISTS users(
         full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
         folio VARCHAR(12) NOT NULL,
         folio_bf VARCHAR(12),
-        figure VARCHAR(50),
-        age INT UNSIGNED,
-        sex VARCHAR(20),
+        role VARCHAR(50),
+         DATETIME,
+        gander VARCHAR(20),
         phone VARCHAR(12),
+        mobile VARCHAR(12),
         email VARCHAR(50),
         CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
 CREATE TABLE IF NOT EXISTS events(
         id INT UNSIGNED AUTO_INCREMENT,
         name VARCHAR(100) NOT NULL,
-        date_e DATE NOT NULL,
-        start_e TIME NOT NULL,
-        finish_e TIME NOT NULL,
+        start_date DATE NOT NULL,
+        start_time TIME NOT NULL,
+        end_time TIME NOT NULL,
         CONSTRAINT pk_events PRIMARY KEY(id)
 )ENGINE=InnoDb;
 CREATE TABLE IF NOT EXISTS assistants(
@@ -51,14 +52,15 @@ commit;
 /*Insertar datos en las tablas*/
 START TRANSACTION;
 CREATE PROCEDURE pc_insert_user(
-        fn VARCHAR(100), ln VARCHAR(100), f VARCHAR(12), a INT UNSIGNED, s VARCHAR(20), p VARCHAR(12), e VARCHAR(50)
+        fn VARCHAR(100), lan VARCHAR(100), f VARCHAR(12), a INT UNSIGNED, s VARCHAR(20), p VARCHAR(12), e VARCHAR(50)
 )
 INSERT OR REMPLACE INTO users(
         first_name, last_name, folio, age, sex,  phone, email
 )
 VALUES
-(fn, ln, f, a, s, p, e)
+(fn, lan, f, a, s, p, e)
 ;
+/*pc_insert_user("","","",45,"","");*/
 CREATE PROCEDURE pc_insert_personal(
         fn VARCHAR(100), ln VARCHAR(100), f VARCHAR(12), a INT UNSIGNED, s VARCHAR(20), p VARCHAR(12), e VARCHAR(50), fb VARCHAR(12), fg VARCHAR(12)
 )
@@ -96,7 +98,7 @@ UPDATE users
 SET
 age = a
 WHERE folio = f;
-
+/*pc_update_age_user("1064XR06", 28);*/
 CREATE PROCEDURE pc_update_date_begin(
         f VARCHAR(12), b DATE
 )
@@ -127,7 +129,7 @@ SELECT full_name AS Nombre,
 FROM users
 WHERE age<=12
 ORDER BY full_name ASC;
-
+/*SELECT * FROM v_childrens;*/
 CREATE VIEW IF NOT EXISTS v_teenagers AS
 SELECT full_name AS Nombre,
        age AS Edad,
