@@ -1,5 +1,13 @@
 # Administrador de Eventos en PILARES
 
+- [ ] Model
+- [ ] View
+- [ ] Control
+- [ ] Validation
+- [ ] Bisness rules
+- [ ] Dominio Service
+- [ ] Repositori
+
 ### Web application 
 
 La aplicacion registra usuarios, eventos y los asistentes a los eventos.
@@ -11,14 +19,6 @@ El repositorio contiene el codigo de la base de datos SQL, la interfaz en html5 
 ## Development
 
 Se sigue el modelo de diseño MVC, usando el gestor de base de datos MariaDB, y los transcompiladores de PUG y SASS
-
-- [ ] Model
-- [ ] View
-- [ ] Control
-- [ ] Validation
-- [ ] Bisness rules
-- [ ] Dominio Service
-- [ ] Repositori
 
 ## Features
 
