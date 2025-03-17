@@ -30,10 +30,10 @@ CREATE TABLE IF NOT EXISTS users(
         email VARCHAR(50),
         CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
-/*Table events*/
+/*Create events table*/
 CREATE TABLE IF NOT EXISTS events(
         id INT UNSIGNED AUTO_INCREMENT,
-        name VARCHAR(100) NOT NULL,
+        name_event VARCHAR(100) NOT NULL,
         start_date DATE NOT NULL,
         start_time TIME NOT NULL,
         end_time TIME NOT NULL,
