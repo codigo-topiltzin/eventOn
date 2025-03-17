@@ -83,8 +83,8 @@ INSERT OR REMPLACE INTO events(
 VALUES
 (n, d, st, et)
 ;
-/*Insert a new assistand*/
-CREATE PROCEDURE pc_insert_assistand(
+/*Create procedure pc_insertAssistand*/
+CREATE PROCEDURE pc_insertAssistand(
         r VARCHAR(100), u INT UNSIGNED, e INT UNSIGNED
 )
 INSERT OR REMPLACE INTO assistants(
