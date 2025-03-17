@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users(
         first_name VARCHAR(100) NOT NULL,
         last_name VARCHAR(100) NOT NULL,
         full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
-        birthdate DATETIME NOT NULL,
+        birthdate DATE NOT NULL,
         gander VARCHAR(20) NOT NULL,
         reference_number VARCHAR(12) NOT NULL,
         reference_number_bf VARCHAR(12),
@@ -48,6 +48,16 @@ CREATE TABLE IF NOT EXISTS assistants(
         CONSTRAINT fk_assistants_event FOREIGN KEY(event) REFERENCES events(id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDb;
+START TRANSACTION;
+CREATE TABLE IF NOT EXISTS editors(
+        id INT UNSIGNED AUTO_INCREMENT,
+        date_change DATETIME DEFAULT CURDATE(),
+        change VARCHAR(100) NOT NULL,
+        user_editor VARCHAR(100) DEFAULT USER(),
+        idUser VARCHAR(12) NOT NULL, 
+        updateUser VARCHAR(500) DEFAULT " ",
+        CONSTRAINT pk_editors PRIMARY KEY(id)
+        )ENGINE=InnoDb;
 commit;
 /*Insert a new user*/
 START TRANSACTION;
