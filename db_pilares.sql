@@ -73,8 +73,8 @@ INSERT OR REMPLACE INTO users(
 VALUES
 (fn, lan, b, g, f, fb, r, p, m, e)
 ;
-/*Insert a new event*/
-CREATE PROCEDURE pc_insert_event(
+/*Create procedure pc_insertEvent*/
+CREATE PROCEDURE pc_insertEvent(
       n VARCHAR(100), d DATE, st TIME, et TIME 
 )
 INSERT OR REMPLACE INTO events(
