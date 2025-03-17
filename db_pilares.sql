@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS events(
         end_time TIME NOT NULL,
         CONSTRAINT pk_events PRIMARY KEY(id)
 )ENGINE=InnoDb;
-/*Create assistants table*/
+/*Create assistants Table*/
 CREATE TABLE IF NOT EXISTS assistants(
         id INT UNSIGNED AUTO_INCREMENT,
         role VARCHAR(100) NOT NULL,
