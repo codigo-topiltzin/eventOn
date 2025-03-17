@@ -2,19 +2,19 @@
 @author:erick14911
 Base de datos db_codigo_topiltzin para el registro de usuarios y eventos
 */
-/*Crear Base de Datos*/
+/*Create data base db_codigo_topiltzin*/
 CREATE DATABASE db_codigo_topiltzin CHARACTER SET utf8mb4;
-/*Crear el usuario administrador*/
+/*Create user admin*/
 CREATE USER IF NOT EXISTS 'erick14911'@%;
-/*Proporciona permisos para la base de datos*/
+/*Grand permit*/
 GRANT ALL 
 ON 'db_codigo_topiltzin'.* 
 TO 'erick14911'@% INDENTIFIED BY 'password';
-/*Usa la base de datos db_codigo_topiltzon*/
+/*edit data base*/
 USE db_codigo_topiltzin;
 
 START TRANSACTION;
-/*Table users*/
+/*Create users table*/
 CREATE TABLE IF NOT EXISTS users(
         id INT UNSIGNED AUTO_INCREMENT,
         first_name VARCHAR(100) NOT NULL,
@@ -30,16 +30,16 @@ CREATE TABLE IF NOT EXISTS users(
         email VARCHAR(50),
         CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
-/*Table events*/
+/*Create events table*/
 CREATE TABLE IF NOT EXISTS events(
         id INT UNSIGNED AUTO_INCREMENT,
-        name VARCHAR(100) NOT NULL,
+        name_event VARCHAR(100) NOT NULL,
         start_date DATE NOT NULL,
         start_time TIME NOT NULL,
         end_time TIME NOT NULL,
         CONSTRAINT pk_events PRIMARY KEY(id)
 )ENGINE=InnoDb;
-/*Table assistants*/
+/*Create assistants Table*/
 CREATE TABLE IF NOT EXISTS assistants(
         id INT UNSIGNED AUTO_INCREMENT,
         role VARCHAR(100) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS assistants(
         CONSTRAINT fk_assistants_event FOREIGN KEY(event) REFERENCES events(id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDb;
-/*Table editors*/
+/*Create editors table*/
 CREATE TABLE IF NOT EXISTS editors(
         id INT UNSIGNED AUTO_INCREMENT,
         date_change DATETIME DEFAULT CURDATE(),
