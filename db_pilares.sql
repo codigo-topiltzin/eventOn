@@ -12,8 +12,9 @@ ON 'db_codigo_topiltzin'.*
 TO 'erick14911'@% INDENTIFIED BY 'password';
 /*Usa la base de datos db_codigo_topiltzon*/
 USE db_codigo_topiltzin;
-/*Creacion de tablas */
+
 START TRANSACTION;
+/*Table users*/
 CREATE TABLE IF NOT EXISTS users(
         id INT UNSIGNED AUTO_INCREMENT,
         first_name VARCHAR(100) NOT NULL,
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS users(
         email VARCHAR(50),
         CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
+/*Table events*/
 CREATE TABLE IF NOT EXISTS events(
         id INT UNSIGNED AUTO_INCREMENT,
         name VARCHAR(100) NOT NULL,
@@ -37,6 +39,7 @@ CREATE TABLE IF NOT EXISTS events(
         end_time TIME NOT NULL,
         CONSTRAINT pk_events PRIMARY KEY(id)
 )ENGINE=InnoDb;
+/*Table assistants*/
 CREATE TABLE IF NOT EXISTS assistants(
         id INT UNSIGNED AUTO_INCREMENT,
         role VARCHAR(100) NOT NULL,
