@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS editors(
         CONSTRAINT pk_editors PRIMARY KEY(id)
         )ENGINE=InnoDb;
 commit;
-/*Insert a new user*/
+/*Create procedure pc_insertUser*/
 START TRANSACTION;
-CREATE PROCEDURE pc_insert_user(
+CREATE PROCEDURE pc_insertUser(
         fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
 )
 INSERT OR REMPLACE INTO users(
@@ -73,8 +73,8 @@ INSERT OR REMPLACE INTO users(
 VALUES
 (fn, lan, b, g, f, fb, r, p, m, e)
 ;
-/*Insert a new event*/
-CREATE PROCEDURE pc_insert_event(
+/*Create procedure pc_insertEvent*/
+CREATE PROCEDURE pc_insertEvent(
       n VARCHAR(100), d DATE, st TIME, et TIME 
 )
 INSERT OR REMPLACE INTO events(
@@ -83,8 +83,8 @@ INSERT OR REMPLACE INTO events(
 VALUES
 (n, d, st, et)
 ;
-/*Insert a new assistand*/
-CREATE PROCEDURE pc_insert_assistand(
+/*Create procedure pc_insertAssistand*/
+CREATE PROCEDURE pc_insertAssistand(
         r VARCHAR(100), u INT UNSIGNED, e INT UNSIGNED
 )
 INSERT OR REMPLACE INTO assistants(
