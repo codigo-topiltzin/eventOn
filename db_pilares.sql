@@ -2,15 +2,15 @@
 @author:erick14911
 Base de datos db_codigo_topiltzin para el registro de usuarios y eventos
 */
-/*Crear Base de Datos*/
+/*Create data base db_codigo_topiltzin*/
 CREATE DATABASE db_codigo_topiltzin CHARACTER SET utf8mb4;
-/*Crear el usuario administrador*/
+/*Create user admin*/
 CREATE USER IF NOT EXISTS 'erick14911'@%;
-/*Proporciona permisos para la base de datos*/
+/*Grand permit*/
 GRANT ALL 
 ON 'db_codigo_topiltzin'.* 
 TO 'erick14911'@% INDENTIFIED BY 'password';
-/*Usa la base de datos db_codigo_topiltzon*/
+/*edit data base*/
 USE db_codigo_topiltzin;
 
 START TRANSACTION;
