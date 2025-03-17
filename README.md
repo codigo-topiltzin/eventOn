@@ -2,7 +2,7 @@
 
 ### Sub Branch
 
-- [ ] Model
+- [x] Model
 - [ ] View
 - [ ] Control
 - [ ] Validation
