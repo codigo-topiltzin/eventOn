@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS assistants(
         CONSTRAINT fk_assistants_event FOREIGN KEY(event) REFERENCES events(id)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDb;
-/*Table editors*/
+/*Create editors table*/
 CREATE TABLE IF NOT EXISTS editors(
         id INT UNSIGNED AUTO_INCREMENT,
         date_change DATETIME DEFAULT CURDATE(),
