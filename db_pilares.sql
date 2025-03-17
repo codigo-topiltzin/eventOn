@@ -14,7 +14,7 @@ TO 'erick14911'@% INDENTIFIED BY 'password';
 USE db_codigo_topiltzin;
 
 START TRANSACTION;
-/*Table users*/
+/*Create users table*/
 CREATE TABLE IF NOT EXISTS users(
         id INT UNSIGNED AUTO_INCREMENT,
         first_name VARCHAR(100) NOT NULL,
