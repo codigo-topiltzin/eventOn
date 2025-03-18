@@ -111,8 +111,8 @@ phone = p,
 mobile = m,
 email = e
 WHERE reference_number = f;
-/*Update event*/
-CREATE PROCEDURE pc_update_event(
+/*Create procedure pc_updateEvent*/
+CREATE PROCEDURE pc_updateEvent(
         n VARCHAR(100), sd DATE, st TIME, et TIME
 )
 UPDATE event
