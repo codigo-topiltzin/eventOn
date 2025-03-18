@@ -5,11 +5,12 @@ Base de datos db_codigo_topiltzin para el registro de usuarios y eventos
 /*Create data base db_codigo_topiltzin*/
 CREATE DATABASE db_codigo_topiltzin CHARACTER SET utf8mb4;
 /*Create user admin*/
-CREATE USER IF NOT EXISTS 'erick14911'@%;
+CREATE USER IF NOT EXISTS 'erick14911'@'%'
+IDENTIFIED BY '**';
 /*Grand permit*/
 GRANT ALL 
 ON 'db_codigo_topiltzin'.* 
-TO 'erick14911'@% INDENTIFIED BY 'password';
+TO 'erick14911'@'%' INDENTIFIED BY 'password';
 /*edit data base*/
 USE db_codigo_topiltzin;
 
