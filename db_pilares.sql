@@ -94,9 +94,9 @@ VALUES
 (r, u, e)
 ;
 commit;
-/*Update user*/
+/*Create procedure pc_updateUser*/
 START TRANSACTION;
-CREATE PROCEDURE pc_update_user(
+CREATE PROCEDURE pc_updateUser(
         fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
 )
 UPDATE users
