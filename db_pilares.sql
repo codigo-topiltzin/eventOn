@@ -9,8 +9,8 @@ CREATE USER IF NOT EXISTS 'erick14911'@'%'
 IDENTIFIED BY '**';
 /*Grand permit*/
 GRANT ALL 
-ON 'db_codigo_topiltzin'.* 
-TO 'erick14911'@'%' INDENTIFIED BY 'password';
+PRIVILEGES ON `db\_codigo\_topiltzin`.* 
+TO 'erick14911'@'%' WITH GRANT OPTION; 
 /*edit data base*/
 USE db_codigo_topiltzin;
 
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS users(
         id INT UNSIGNED AUTO_INCREMENT,
         first_name VARCHAR(100) NOT NULL,
         last_name VARCHAR(100) NOT NULL,
-        full_name GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
+        full_name VARCHAR(200) GENERATED ALWAYS AS (CONCAT(first_name, " ", last_name)),
         birthdate DATE NOT NULL,
         gander VARCHAR(20) NOT NULL,
         reference_number VARCHAR(12) NOT NULL,
@@ -56,10 +56,10 @@ CREATE TABLE IF NOT EXISTS assistants(
 CREATE TABLE IF NOT EXISTS editors(
         id INT UNSIGNED AUTO_INCREMENT,
         date_change DATETIME DEFAULT CURDATE(),
-        change VARCHAR(100) NOT NULL,
         user_editor VARCHAR(100) DEFAULT USER(),
+        type VARCHAR(100) NOT NULL,
         idUser VARCHAR(12) NOT NULL, 
-        updateUser VARCHAR(500) DEFAULT " ",
+        updateUser VARCHAR(1000) DEFAULT " ",
         CONSTRAINT pk_editors PRIMARY KEY(id)
         )ENGINE=InnoDb;
 commit;
