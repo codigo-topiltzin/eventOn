@@ -55,74 +55,126 @@ CREATE TABLE IF NOT EXISTS assistants(
 /*Create editors table*/
 CREATE TABLE IF NOT EXISTS editors(
         id INT UNSIGNED AUTO_INCREMENT,
-        date_change DATETIME DEFAULT CURDATE(),
-        user_editor VARCHAR(100) DEFAULT USER(),
-        type VARCHAR(100) NOT NULL,
+        date_change DATETIME DEFAULT CURRENT_TIMESTAMP,
+        user_editor VARCHAR(100) NOT NULL,
+        type_change VARCHAR(100) NOT NULL,
         idUser VARCHAR(12) NOT NULL, 
         updateUser VARCHAR(1000) DEFAULT " ",
         CONSTRAINT pk_editors PRIMARY KEY(id)
         )ENGINE=InnoDb;
 commit;
 /*Create procedure pc_insertUser*/
-START TRANSACTION;
+DELIMITER $$
+
 CREATE PROCEDURE pc_insertUser(
-        fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
+        IN fn VARCHAR(100), 
+        IN lan VARCHAR(100), 
+        IN b DATE, 
+        IN g VARCHAR(20), 
+        IN f VARCHAR(12), 
+        IN fb VARCHAR(12), 
+        IN r VARCHAR(50), 
+        IN p VARCHAR(12), 
+        IN m VARCHAR(12), 
+        IN e VARCHAR(50) 
 )
-INSERT OR REMPLACE INTO users(
-        first_name, last_name, birthdate, gander, reference_number, reference_number_bf, role, phone, mobile, email
-)
-VALUES
-(fn, lan, b, g, f, fb, r, p, m, e)
-;
+BEGIN
+        INSERT OR REMPLACE INTO users(
+                first_name, last_name, birthdate, gander, reference_number, reference_number_bf, role, phone, mobile, email
+        )
+        VALUES
+        (fn, lan, b, g, f, fb, r, p, m, e);
+END $$
+
+DELIMITER ;
 /*Create procedure pc_insertEvent*/
+DELIMITER $$
+
 CREATE PROCEDURE pc_insertEvent(
-      n VARCHAR(100), d DATE, st TIME, et TIME 
+        IN n VARCHAR(100),
+        IN d DATE, 
+        IN st TIME,
+        IN et TIME 
 )
-INSERT OR REMPLACE INTO events(
-        name, start_date, start_time, end_time
-)
-VALUES
-(n, d, st, et)
-;
+BEGIN
+        INSERT OR REMPLACE INTO events(
+                name_event, start_date, start_time, end_time
+        )
+        VALUES
+        (n, d, st, et);
+END $$
+
+DELIMITER ;
 /*Create procedure pc_insertAssistand*/
+DELIMITER $$
+
 CREATE PROCEDURE pc_insertAssistand(
-        r VARCHAR(100), u INT UNSIGNED, e INT UNSIGNED
+        IN r VARCHAR(100),
+        IN u INT UNSIGNED, 
+        IN e INT UNSIGNED
 )
-INSERT OR REMPLACE INTO assistants(
-        role, user_pilares, event 
-)
-VALUES
-(r, u, e)
-;
+BEGIN
+        INSERT OR REMPLACE INTO assistants(
+                role, user_pilares, event 
+        )
+        VALUES
+        (r, u, e);
+END $$
+
+DELIMITER ;
 commit;
 /*Create procedure pc_updateUser*/
 START TRANSACTION;
+DELIMITER $$
+
 CREATE PROCEDURE pc_updateUser(
-        fn VARCHAR(100), lan VARCHAR(100), b DATE, g VARCHAR(20), f VARCHAR(12), fb VARCHAR(12) DEFAULT " ", r VARCHAR(50) DEFAULT " ", p VARCHAR(12) DEFAULT " ", m VARCHAR(12) DEFAULT " ", e VARCHAR(50) DEFAULT " " 
+        IN fn VARCHAR(100), 
+        IN lan VARCHAR(100), 
+        IN b DATE, 
+        IN g VARCHAR(20), 
+        IN f VARCHAR(12), 
+        IN fb VARCHAR(12), 
+        IN r VARCHAR(50), 
+        IN p VARCHAR(12), 
+        IN m VARCHAR(12), 
+        IN e VARCHAR(50) 
 )
-UPDATE users
-SET
-first_name = fn,
-last_name = lan,
-birthdate = b,
-gander = g,
-reference_number = fb,
-role = r,
-phone = p,
-mobile = m,
-email = e
-WHERE reference_number = f;
+BEGIN
+        UPDATE users
+        SET
+        first_name = fn,
+        last_name = lan,
+        birthdate = b,
+        gander = g,
+        reference_number = fb,
+        role = r,
+        phone = p,
+        mobile = m,
+        email = e
+        WHERE reference_number = f;
+END  $$
+
+DELIMITER ;
 /*Create procedure pc_updateEvent*/
+DELIMITER $$
+
 CREATE PROCEDURE pc_updateEvent(
-        n VARCHAR(100), sd DATE, st TIME, et TIME
+        IN n VARCHAR(100), 
+        IN sd DATE, 
+        IN st TIME, 
+        IN et TIME
 )
-UPDATE event
-SET
-name = n,
-start_date = sd,
-start_time = st,
-end_time = et
-WHERE name LIKE n AND start_date LIKE sd;
+BEGIN
+        UPDATE event
+        SET
+        name = n,
+        start_date = sd,
+        start_time = st,
+        end_time = et
+        WHERE name LIKE n AND start_date LIKE sd;
+END $$
+
+DELIMITER ;
 /*Update assistants*/
 CREATE PROCEDURE pc_update_assistants(
         u INT UNSIGNED, r DATE
