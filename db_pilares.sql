@@ -63,6 +63,18 @@ CREATE TABLE IF NOT EXISTS editors(
         CONSTRAINT pk_editors PRIMARY KEY(id)
         )ENGINE=InnoDb;
 commit;
+
+CREATE TRIGGER tr_recordEditor_ai
+AFTER INSERT ON users
+FOR EACH ROW
+INSERT INTO editors(
+        date_change, user_editor, type_change, idUser, updateUser
+)
+VALUES
+(
+CURRENT_TIMESTAMP, USER(), "Insert user", NEW.reference_number, CONCAT(NEW.full_name, " ", NEW.birthdate, " ", NEW.gander, " ", NEW.reference_number, " ", NEW.reference_number_bf, " ", NEW.role, " ", NEW.phone, " ", NEW.mobile, " ", NEW.email )
+);  
+
 /*Create procedure pc_insertUser*/
 DELIMITER $$
 
