@@ -146,7 +146,7 @@ BEGIN
         last_name = lan,
         birthdate = b,
         gander = g,
-        reference_number = fb,
+        reference_number_bf = fb,
         role = r,
         phone = p,
         mobile = m,
@@ -167,7 +167,7 @@ CREATE PROCEDURE pc_updateEvent(
 BEGIN
         UPDATE event
         SET
-        name = n,
+        name_event = n,
         start_date = sd,
         start_time = st,
         end_time = et
@@ -176,15 +176,21 @@ END $$
 
 DELIMITER ;
 /*Update assistants*/
-CREATE PROCEDURE pc_update_assistants(
-        u INT UNSIGNED, r DATE
-)
-UPDATE assistants
-SET
-role = r
-WHERE user_pilares = u;
-commit;
+DELIMITER $$
 
+CREATE PROCEDURE pc_updateAssistants(
+        IN u INT UNSIGNED, 
+        IN r DATE
+)
+BEGIN
+        UPDATE assistants
+        SET
+        role = r
+        WHERE user_pilares = u;
+END $$
+
+DELIMITER ;
+commit;
 /*Delete a user*/
 START TRANSACTION;
 
